@@ -1,28 +1,26 @@
-import { Livro } from "../modelo/Livro";
+import { Livro } from '../modelo/Livro';
 
-class ControleLivro {
-    private livros: Array<Livro> = [
-        new Livro(1, 1, "O Pequeno Príncipe", "Um piloto se encontra perdido no deserto e conhece um jovem príncipe", ["Antoine de Saint-Exupéry"]),
-        new Livro(2, 2, "Dom Casmurro", "A história de Bentinho e Capitu, e as dúvidas sobre sua fidelidade", ["Machado de Assis"]),
-        new Livro(3, 3, "A Metamorfose", "A transformação de um homem em um inseto e as consequências em sua vida", ["Franz Kafka"])
-    ];
+let livros: Array<Livro> = [
+    { codigo: 1, codEditora: 1, titulo: 'O Pequeno Príncipe', resumo: 'Um piloto se encontra perdido no deserto e conhece um jovem príncipe', autores: ['Antoine de Saint-Exupéry'] },
+    { codigo: 2, codEditora: 2, titulo: 'Dom Casmurro', resumo: 'A história de Bentinho e Capitu, e as dúvidas sobre sua fidelidade', autores: ['Machado de Assis'] },
+    { codigo: 3, codEditora: 3, titulo: 'A Metamorfose', resumo: 'A transformação de um homem em um inseto e as consequências em sua vida', autores: ['Franz Kafka'] }
+];
 
+export class ControleLivros {
     obterLivros(): Array<Livro> {
-        return this.livros;
+        return livros;
     }
 
-    incluir(novoLivro: Livro): void {
-        const maiorCodigo = this.livros.reduce((max, livro) => Math.max(max, livro.codigo), 0);
-        novoLivro.codigo = maiorCodigo + 1; // Atribui o próximo código disponível
-        this.livros.push(novoLivro);
+    incluir(livro: Livro): void {
+        const codigoNovo = Math.max(...livros.map((l) => l.codigo)) + 1;
+        livro.codigo = codigoNovo;
+        livros.push(livro);
     }
 
     excluir(codigo: number): void {
-        const index = this.livros.findIndex(livro => livro.codigo === codigo);
-        if (index !== -1) {
-            this.livros.splice(index, 1); // Remove o livro do array
+        const index = livros.findIndex((livro) => livro.codigo === codigo);
+        if (index >= 0) {
+            livros.splice(index, 1);
         }
     }
 }
-
-export default ControleLivro;
