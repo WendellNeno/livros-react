@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import ControleLivro from './ControleLivros'; // Supondo que o controlador esteja no mesmo diretório
-import ControleEditora from './ControleEditora';
+import ControleLivro from '../src/controle/ControleEditora.ts'; // Supondo que o controlador esteja no mesmo diretório
+import ControleEditora from '../src/controle/ControleLivros.ts';
 
 const controleLivro = new ControleLivro();
+console.log(controleLivro.obterLivros()); // Isso deve funcionar sem erros
 const controleEditora = new ControleEditora();
 
 function LinhaLivro({ livro, excluir }) {
@@ -68,3 +69,6 @@ function LivroLista() {
 }
 
 export default LivroLista;
+
+console.log(ControleLivro); // Verificar a função/classe importada
+console.log(new ControleLivro().obterLivros); // Deve ser uma função
